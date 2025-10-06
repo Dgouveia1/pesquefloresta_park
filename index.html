@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pesque Floresta Park — App de Reservas</title>
+
+  <!-- Font Awesome (ícones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="app" role="application" aria-label="Pesque Floresta Park">
+    <header class="appbar">
+      <div class="logo" aria-hidden="true">
+        <img alt="logo" src="logo_pesqueiro.jpg" onerror="this.onerror=null;this.src='https://placehold.co/64x64/ffffff/00b8d4?text=PFP';">
+      </div>
+      <div class="title">
+        <h1>Pesque Floresta Park</h1>
+        <p>Reservas & Ingressos Online</p>
+      </div>
+      <div class="header-info">
+        <span><i class="fa-regular fa-sun"></i> Aberto 10h — 22h</span>
+        <span><i class="fa-solid fa-water-ladder"></i> Piscinas até 19h</span>
+      </div>
+    </header>
+
+    <main class="appbody">
+      <div class="layout" style="width:100%;">
+        <!-- Coluna Principal -->
+        <section id="home-screen" class="screen active" data-screen="home">
+          <div class="pane-header">
+            <div>
+              <h2>Bem-vindo ao Paraíso!</h2>
+              <div class="pane-sub">Sua diversão começa aqui. Reserve de forma fácil e rápida.</div>
+            </div>
+          </div>
+
+          <div class="card carousel" id="carousel">
+            <img id="carousel-image" src="piscina.PNG" alt="Piscina do parque">
+            <div class="carousel-nav">
+              <button id="prev-btn"><i class="fa fa-chevron-left"></i></button>
+              <button id="next-btn"><i class="fa fa-chevron-right"></i></button>
+            </div>
+            <div class="caption"><strong>Piscinas para toda a família</strong></div>
+          </div>
+
+          <div class="card">
+            <h3>Sobre o Parque</h3>
+            <p class="muted-text">O Pesque Floresta Park é o seu refúgio ideal para diversão e tranquilidade. Oferecemos amplos espaços para pesca esportiva, piscinas refrescantes para adultos e crianças, e quiosques aconchegantes para seu churrasco. Garanta seu dia de lazer fazendo uma reserva pelo nosso app!</p>
+            <div class="actions">
+              <button class="btn" id="start-reserve"><i class="fa fa-calendar-check"></i> Fazer Reserva Agora</button>
+              <button class="btn secondary" id="show-my-reservations"><i class="fa fa-ticket"></i> Minhas Reservas</button>
+            </div>
+          </div>
+
+          <div class="info-grid">
+              <div class="info-card">
+                  <i class="fa fa-fish-fins icon"></i>
+                  <h4>Pesca Esportiva</h4>
+                  <p>Lagos repletos de peixes para uma pescaria relaxante.</p>
+              </div>
+              <div class="info-card">
+                  <i class="fa fa-umbrella-beach icon"></i>
+                  <h4>Quiosques</h4>
+                  <p>Reserve seu espaço privativo com churrasqueira.</p>
+              </div>
+          </div>
+        </section>
+
+        <!-- Coluna Direita / Painel Lateral -->
+        <aside class="sidebar">
+          <div class="card" id="quick-panel">
+            <h4><i class="fa-solid fa-cart-shopping"></i> Resumo do Pedido</h4>
+            <div class="quick-summary-items">
+              <div><i class="fa-solid fa-user"></i> Adultos: <span id="quick-adult">0</span></div>
+              <div><i class="fa-solid fa-child"></i> Crianças: <span id="quick-child">0</span></div>
+              <div><i class="fa-solid fa-house-chimney-window"></i> Quiosques: <span id="quick-quiosque">0</span></div>
+            </div>
+            <div class="summary" id="quick-total">Total: <strong>R$ 0,00</strong></div>
+          </div>
+
+          <div class="card">
+            <h4><i class="fa-solid fa-map-location-dot"></i> Como Chegar</h4>
+            <div class="location-text">
+              BR 277, Km 712 — Dois Lapachos<br>Santa Terezinha de Itaipu - PR
+            </div>
+            <div class="social-actions">
+              <a class="btn ghost" href="https://api.whatsapp.com/send?phone=5545999022404" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chamar no Zap</a>
+              <a class="btn ghost" href="https://www.instagram.com/pesquefloresta_park/" target="_blank"><i class="fa-brands fa-instagram"></i> Ver no Insta</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Tela de Cadastro (Modal) -->
+      <section id="cadastro-screen" class="screen screen-modal" data-screen="cadastro">
+        <div class="pane-header">
+          <div>
+            <h2><i class="fa-solid fa-user-pen"></i> Seus Dados</h2>
+            <div class="pane-sub">Precisamos de algumas informações para identificar sua reserva.</div>
+          </div>
+          <div>
+            <button class="btn secondary" id="cancel-cadastro"><i class="fa fa-arrow-left"></i> Voltar</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <form id="form-cadastro" autocomplete="on">
+            <div class="form-grid">
+              <div>
+                <label for="nome">Nome completo</label>
+                <input id="nome" name="nome" type="text" required placeholder="Seu nome completo">
+              </div>
+              <div>
+                <label for="cpf">CPF</label>
+                <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00">
+              </div>
+              <div>
+                  <label for="telefone">Celular (WhatsApp)</label>
+                  <input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000">
+              </div>
+              <div>
+                  <label for="email">E-mail</label>
+                  <input id="email" name="email" type="email" placeholder="seu@email.com">
+              </div>
+              <div class="form-actions">
+                <button class="btn" type="submit"><i class="fa fa-arrow-right"></i> Continuar</button>
+                <button type="button" class="btn ghost" id="limpar-cadastro">Limpar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Tela de Seleção (Modal) -->
+      <section id="selecao-screen" class="screen screen-modal" data-screen="selecao">
+        <div class="pane-header">
+          <div>
+            <h2><i class="fa-solid fa-calendar-days"></i> Monte seu Dia</h2>
+            <div class="pane-sub">Escolha a data, os ingressos e adicione extras!</div>
+          </div>
+          <div>
+            <button class="btn secondary" id="back-to-cadastro"><i class="fa fa-arrow-left"></i> Voltar</button>
+          </div>
+        </div>
+
+        <div class="card">
+            <div class="date-picker-wrapper">
+                <label for="data">Data da visita</label>
+                <input id="data" type="date" />
+            </div>
+
+            <h4 class="section-title">Ingressos</h4>
+            <div class="price-list">
+                <div class="price-row"><span><i class="fa-solid fa-sun"></i> Adulto (Seg-Sex)</span><span class="price-highlight">R$ 60,00</span></div>
+                <div class="price-row"><span><i class="fa-solid fa-star"></i> Adulto (Fim de Semana / Feriado)</span><span class="price-highlight">R$ 70,00</span></div>
+                <div class="price-row"><span><i class="fa-solid fa-child-reaching"></i> Criança (até 120cm)</span><span class="price-highlight">R$ 35,00</span></div>
+            </div>
+
+            <div class="counters">
+              <div class="counter"><div class="label">Adulto (Seg-Sex)</div><div class="controls"><button class="btn-circle" data-action="dec" data-key="adultoSeg"><i class="fa fa-minus"></i></button><div class="count-badge" id="count-adultoSeg">0</div><button class="btn-circle" data-action="inc" data-key="adultoSeg"><i class="fa fa-plus"></i></button></div></div>
+              <div class="counter"><div class="label">Adulto (Fds)</div><div class="controls"><button class="btn-circle" data-action="dec" data-key="adultoFds"><i class="fa fa-minus"></i></button><div class="count-badge" id="count-adultoFds">0</div><button class="btn-circle" data-action="inc" data-key="adultoFds"><i class="fa fa-plus"></i></button></div></div>
+              <div class="counter"><div class="label">Criança</div><div class="controls"><button class="btn-circle" data-action="dec" data-key="crianca"><i class="fa fa-minus"></i></button><div class="count-badge" id="count-crianca">0</div><button class="btn-circle" data-action="inc" data-key="crianca"><i class="fa fa-plus"></i></button></div></div>
+            </div>
+
+            <h4 class="section-title">Extras</h4>
+             <div class="price-list">
+                <div class="price-row"><span><i class="fa-solid fa-sun"></i> Quiosque (Seg-Sex)</span><span class="price-highlight">R$ 70,00</span></div>
+                <div class="price-row"><span><i class="fa-solid fa-star"></i> Quiosque (Fim de Semana / Feriado)</span><span class="price-highlight">R$ 80,00</span></div>
+            </div>
+            <div class="counters">
+              <div class="counter"><div class="label">Quiosque (Seg-Sex)</div><div class="controls"><button class="btn-circle" data-action="dec" data-key="quiosqueSeg"><i class="fa fa-minus"></i></button><div class="count-badge" id="count-quiosqueSeg">0</div><button class="btn-circle" data-action="inc" data-key="quiosqueSeg"><i class="fa fa-plus"></i></button></div></div>
+              <div class="counter"><div class="label">Quiosque (Fds)</div><div class="controls"><button class="btn-circle" data-action="dec" data-key="quiosqueFds"><i class="fa fa-minus"></i></button><div class="count-badge" id="count-quiosqueFds">0</div><button class="btn-circle" data-action="inc" data-key="quiosqueFds"><i class="fa fa-plus"></i></button></div></div>
+            </div>
+
+            <div class="final-actions">
+              <div class="summary" id="resumo-compra">Selecione uma data e quantidades</div>
+              <div class="action-buttons">
+                <button class="btn ghost" id="reset-selecao"><i class="fa fa-eraser"></i> Limpar</button>
+                <button class="btn" id="to-confirm" disabled><i class="fa fa-check"></i> Finalizar Compra</button>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- Tela de Confirmação (Modal) -->
+      <section id="confirm-screen" class="screen screen-modal" data-screen="confirm">
+        <div class="pane-header">
+          <div>
+            <h2><i class="fa-solid fa-circle-check"></i> Reserva Confirmada!</h2>
+            <div class="pane-sub">Seu QR Code foi gerado. Apresente na entrada do parque.</div>
+          </div>
+        </div>
+
+        <div class="card confirmation-card">
+            <div class="qr-code-area">
+              <div id="qrcode" aria-hidden="true"></div>
+              <small class="muted-text">Apresente este QR na entrada</small>
+            </div>
+            <div class="ticket-details">
+              <h3 id="confirm-name">—</h3>
+              <div class="muted-text" id="confirm-email">—</div>
+              <div class="ticket-date" id="confirm-date">—</div>
+              <div id="confirm-details" class="summary"></div>
+              <div class="ticket-actions">
+                <button class="btn" id="new-reservation"><i class="fa fa-plus"></i> Nova Reserva</button>
+                <button class="btn secondary" id="download-ticket"><i class="fa fa-download"></i> Baixar Ingresso</button>
+              </div>
+            </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Navegação Inferior -->
+    <nav class="bottom-nav" aria-label="Navegação">
+      <div class="nav-item active" data-target="home"><i class="fa fa-home"></i><span>Home</span></div>
+      <div class="nav-item" data-target="cadastro"><i class="fa fa-user"></i><span>Cadastro</span></div>
+      <div class="nav-item" data-target="selecao"><i class="fa fa-calendar-check"></i><span>Seleção</span></div>
+      <div class="nav-item" data-target="confirm"><i class="fa fa-check-circle"></i><span>Confirmação</span></div>
+    </nav>
+    
+    <footer class="app-footer">
+        <p>Desenvolvido com <i class="fa fa-heart"></i> por dgouvei4</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

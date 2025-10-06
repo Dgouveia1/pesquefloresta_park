@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pesque Floresta Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo_pesqueiro.jpg" alt="Logo" class="sidebar-logo">
+                <h2>Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-target="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="#reservas" class="nav-link" data-target="reservas"><i class="fas fa-calendar-alt"></i> Reservas</a>
+                <a href="#checkin" class="nav-link" data-target="checkin"><i class="fas fa-qrcode"></i> Check-in</a>
+                <a href="#financeiro" class="nav-link" data-target="financeiro"><i class="fas fa-chart-line"></i> Financeiro</a>
+                <a href="#config" class="nav-link" data-target="config"><i class="fas fa-cog"></i> Configurações</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="page active">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="total-visitantes">--</span>
+                            <span class="stat-label">Visitantes Presentes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-ticket-alt"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="reservas-hoje">--</span>
+                            <span class="stat-label">Reservas para Hoje</span>
+                        </div>
+                    </div>
+                     <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="faturamento-dia">--</span>
+                            <span class="stat-label">Faturamento do Dia</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fas fa-house-chimney-window"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="quiosques-ocupados">--</span>
+                            <span class="stat-label">Quiosques Ocupados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card">
+                        <h3>Próximas Reservas</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Data</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-reservations-body">
+                                <!-- Dados inseridos via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <h3>Faturamento da Semana</h3>
+                        <div class="chart-container">
+                            <canvas id="finance-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reservas -->
+            <section id="reservas" class="page">
+                <h1>Gerenciamento de Reservas</h1>
+                <div class="card">
+                    <div class="toolbar">
+                        <input type="date" id="reservation-date-filter">
+                        <input type="text" id="reservation-search" placeholder="Buscar por nome ou CPF...">
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Data</th>
+                                <th>Itens</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th class="actions-cell">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-table-body">
+                            <!-- Dados inseridos via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Check-in -->
+            <section id="checkin" class="page">
+                <h1>Check-in de Visitantes</h1>
+                <div class="card checkin-container">
+                    <div class="qr-scanner">
+                        <i class="fas fa-qrcode scanner-icon"></i>
+                        <p>Aponte a câmera para o QR Code do ingresso</p>
+                        <button class="btn">Simular Leitura de Hoje</button>
+                    </div>
+                    <div class="checkin-details">
+                        <h3>Detalhes da Reserva</h3>
+                        <div id="checkin-result">
+                            <p class="placeholder">Aguardando leitura do QR Code...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Financeiro -->
+            <section id="financeiro" class="page">
+                 <h1>Relatórios Financeiros</h1>
+                 <div class="card">
+                     <h3>Em desenvolvimento...</h3>
+                     <p>Esta área trará relatórios detalhados de faturamento, vendas por tipo de ingresso e muito mais.</p>
+                 </div>
+            </section>
+            
+            <!-- Configurações -->
+            <section id="config" class="page">
+                 <h1>Configurações do Sistema</h1>
+                 <div class="card">
+                     <h3>Em desenvolvimento...</h3>
+                     <p>Aqui você poderá ajustar preços, horários de funcionamento e outras configurações do parque.</p>
+                 </div>
+            </section>
+        </main>
+
+        <!-- Modal de Detalhes da Reserva -->
+        <div id="details-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Detalhes da Reserva</h3>
+                    <button id="modal-close-btn" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Conteúdo injetado via JS -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="modal-cancel-btn">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

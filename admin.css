@@ -1,0 +1,360 @@
+:root {
+    --bg-admin: #f4f7fa;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #cbd5e1;
+    --sidebar-text-hover: #ffffff;
+    --sidebar-active: #38bdf8;
+    --card-bg: #ffffff;
+    --text-dark: #334155;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(100, 116, 139, 0.12);
+    --blue: #3b82f6;
+    --green: #22c55e;
+    --orange: #f97316;
+    --red: #ef4444;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: var(--bg-admin);
+    color: var(--text-dark);
+  }
+  
+  .admin-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* SIDEBAR */
+  .sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .sidebar-header {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .sidebar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  .sidebar-header h2 {
+    color: white;
+    font-size: 1.25rem;
+  }
+  .sidebar-nav {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nav-link {
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--sidebar-text-hover);
+  }
+  .nav-link.active {
+    background-color: var(--sidebar-active);
+    color: white;
+    font-weight: 600;
+  }
+  .nav-link i {
+    width: 20px;
+    text-align: center;
+  }
+  
+  /* MAIN CONTENT */
+  .main-content {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+  }
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  
+  /* CARDS E GRIDS */
+  .card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  .stat-icon {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 1.25rem;
+  }
+  .stat-icon.blue { background-color: var(--blue); }
+  .stat-icon.green { background-color: var(--green); }
+  .stat-icon.orange { background-color: var(--orange); }
+  .stat-icon.red { background-color: var(--red); }
+  
+  .stat-info { display: flex; flex-direction: column; }
+  .stat-value { font-size: 1.75rem; font-weight: 700; }
+  .stat-label { font-size: 0.9rem; color: var(--text-light); }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+  }
+  
+  .chart-container {
+      position: relative;
+      height: 300px;
+  }
+
+  /* TABELAS */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .data-table th, .data-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+  }
+  .data-table thead {
+    background-color: var(--bg-admin);
+  }
+  .data-table th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .data-table .actions-cell {
+      text-align: right;
+  }
+  .status-badge {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-align: center;
+      display: inline-block;
+  }
+  .status-confirmado { background-color: #e0f2fe; color: #0284c7; }
+  .status-checked-in { background-color: #dcfce7; color: #16a34a; }
+  .status-pendente { background-color: #ffedd5; color: #f97316; }
+  .status-cancelado { background-color: #fee2e2; color: #dc2626; }
+  
+  /* CHECK-IN PAGE */
+  .checkin-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+  }
+  @media(min-width: 768px) {
+      .checkin-container { grid-template-columns: 250px 1fr; }
+  }
+  .qr-scanner {
+      text-align: center;
+      padding: 20px;
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+  }
+  .scanner-icon {
+      font-size: 80px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+  }
+  .qr-scanner p {
+      color: var(--text-light);
+      margin-bottom: 16px;
+  }
+  .checkin-details h3 {
+      margin-bottom: 16px;
+  }
+  .checkin-result .placeholder {
+      color: var(--text-light);
+  }
+  .checkin-info p {
+      margin-bottom: 8px;
+  }
+  .checkin-info strong {
+      color: var(--text-dark);
+  }
+  .success-message {
+      color: var(--green);
+      font-weight: 600;
+  }
+   .error-message {
+      color: var(--red);
+      font-weight: 600;
+  }
+  
+  .btn {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+  }
+  .btn.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    background-color: var(--text-light);
+  }
+  .btn.btn-sm:hover {
+      background-color: var(--text-dark);
+  }
+  .btn.btn-secondary {
+    background-color: var(--text-light);
+  }
+  .btn.btn-secondary:hover {
+      background-color: var(--text-dark);
+  }
+  
+  .toolbar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+  }
+  .toolbar input {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+  }
+
+  /* MODAL */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background-color: var(--card-bg);
+        padding: 24px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content {
+        transform: scale(1);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+        font-size: 1.25rem;
+        color: var(--text-dark);
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--text-light);
+    }
+
+    .modal-body .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .modal-body .detail-row:last-child {
+        border-bottom: none;
+    }
+    .modal-body .detail-label {
+        color: var(--text-light);
+        font-weight: 500;
+    }
+    .modal-body .detail-value {
+        color: var(--text-dark);
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .modal-footer {
+        margin-top: 24px;
+        text-align: right;
+    }
