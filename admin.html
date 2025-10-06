@@ -24,10 +24,19 @@
             </nav>
         </aside>
 
+        <div class="sidebar-backdrop"></div>
+
         <main class="main-content">
+            <header class="main-header">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="page-title">Dashboard</h1>
+            </header>
+
             <!-- Dashboard -->
             <section id="dashboard" class="page active">
-                <h1>Dashboard</h1>
+                <h1 class="page-title-desktop">Dashboard</h1>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon blue"><i class="fas fa-users"></i></div>
@@ -62,18 +71,20 @@
                 <div class="content-grid">
                     <div class="card">
                         <h3>Próximas Reservas</h3>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Data</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recent-reservations-body">
-                                <!-- Dados inseridos via JS -->
-                            </tbody>
-                        </table>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Data</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-reservations-body">
+                                    <!-- Dados inseridos via JS -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="card">
                         <h3>Faturamento da Semana</h3>
@@ -86,34 +97,36 @@
 
             <!-- Reservas -->
             <section id="reservas" class="page">
-                <h1>Gerenciamento de Reservas</h1>
+                <h1 class="page-title-desktop">Gerenciamento de Reservas</h1>
                 <div class="card">
                     <div class="toolbar">
                         <input type="date" id="reservation-date-filter">
                         <input type="text" id="reservation-search" placeholder="Buscar por nome ou CPF...">
                     </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Data</th>
-                                <th>Itens</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th class="actions-cell">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reservations-table-body">
-                            <!-- Dados inseridos via JS -->
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Data</th>
+                                    <th>Itens</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th class="actions-cell">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservations-table-body">
+                                <!-- Dados inseridos via JS -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
             
             <!-- Check-in -->
             <section id="checkin" class="page">
-                <h1>Check-in de Visitantes</h1>
+                <h1 class="page-title-desktop">Check-in de Visitantes</h1>
                 <div class="card checkin-container">
                     <div class="qr-scanner">
                         <i class="fas fa-qrcode scanner-icon"></i>
@@ -131,7 +144,7 @@
 
             <!-- Financeiro -->
             <section id="financeiro" class="page">
-                 <h1>Relatórios Financeiros</h1>
+                 <h1 class="page-title-desktop">Relatórios Financeiros</h1>
                  <div class="card">
                      <h3>Em desenvolvimento...</h3>
                      <p>Esta área trará relatórios detalhados de faturamento, vendas por tipo de ingresso e muito mais.</p>
@@ -140,7 +153,7 @@
             
             <!-- Configurações -->
             <section id="config" class="page">
-                 <h1>Configurações do Sistema</h1>
+                 <h1 class="page-title-desktop">Configurações do Sistema</h1>
                  <div class="card">
                      <h3>Em desenvolvimento...</h3>
                      <p>Aqui você poderá ajustar preços, horários de funcionamento e outras configurações do parque.</p>
@@ -167,3 +180,4 @@
     <script src="admin.js"></script>
 </body>
 </html>
+

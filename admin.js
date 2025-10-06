@@ -4,23 +4,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const pages = document.querySelectorAll('.page');
     const modal = document.getElementById('details-modal');
     const modalCloseBtns = [document.getElementById('modal-close-btn'), document.getElementById('modal-cancel-btn')];
+    const menuToggle = document.getElementById('menu-toggle');
+    const adminLayout = document.querySelector('.admin-layout');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const pageTitle = document.getElementById('page-title');
 
     // --- NAVEGAÇÃO ---
     navLinks.forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
+            
+            // Troca de página
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(targetId).classList.add('active');
+
+            // Atualiza link ativo
             navLinks.forEach(nav => nav.classList.remove('active'));
             link.classList.add('active');
+
+            // Atualiza título do header mobile
+            if(pageTitle) {
+                pageTitle.textContent = link.textContent.trim();
+            }
+
+            // Fecha o menu lateral no mobile após clicar
+            if (window.innerWidth <= 820) {
+                adminLayout.classList.remove('sidebar-open');
+            }
         });
     });
+
+    // --- MENU LATERAL MOBILE ---
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            adminLayout.classList.toggle('sidebar-open');
+        });
+    }
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener('click', () => {
+            adminLayout.classList.remove('sidebar-open');
+        });
+    }
     
     // --- DADOS FAKE AMPLIADOS ---
     const today = new Date();
     const formatDate = (date) => {
-        // Garante a formatação correta independente do fuso horário do navegador
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
@@ -39,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const fakeReservations = [];
     for (let i = 0; i < 25; i++) {
-        const daysDiff = Math.floor(Math.random() * 10) - 4; // de -4 a +5 dias a partir de hoje
+        const daysDiff = Math.floor(Math.random() * 10) - 4;
         const date = createFakeDate(daysDiff);
         const adultos = Math.floor(Math.random() * 4) + 1;
         const criancas = Math.floor(Math.random() * 3);
@@ -64,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nome: generateRandomName(), 
             cpf: `${Math.floor(Math.random()*1000)}.XXX.XXX-XX`,
             data: formatDate(date),
-            dateObj: date, // Manter o objeto Date para cálculos
+            dateObj: date,
             itens: { adultos, criancas, quiosques },
             total: total, 
             status: status
@@ -285,3 +314,4 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDashboard();
     loadReservations();
 });
+
